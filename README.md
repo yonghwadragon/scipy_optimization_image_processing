@@ -1,17 +1,17 @@
 # scipy_optimization_image_processing
-Scipy를 활용한 함수 최적화 및 OpenCV &amp; Tesseract OCR을 이용한 이미지 처리 실험
+Scipy를 활용한 함수 최적화 및 OpenCV & Tesseract OCR을 이용한 이미지 처리 실험
 
 # first_scipy.ipynb
 
 ## 📌 개요
 2024년 9월 14일에 이 프로젝트는 **Scipy 라이브러리를 활용한 최적화 및 OpenCV 이미지 처리 시험**입니다.  
-전자공학과 전공서적에서 보여준 내용을 직접 코드로 구현하며, 다양한 최적화 기법과 이미지 필터링을 적용해 보였습니다.
+전자공학과 전공서적에서 보여준 내용을 직접 코드로 구현하며, 다양한 최적화 기법과 이미지 필터링을 적용해 보았습니다.
 
 ## 🛠️ 사용한 기술
-- `Scipy.optimize`를 이용한 함수 최소항 창기
+- `Scipy.optimize`를 이용한 함수 최소항 찾기
 - `Matplotlib`을 활용한 데이터 시각화
 - `OpenCV`를 활용한 이미지 처리 및 Gaussian Blur 필터 적용
-- `Pytesseract`를 이용한 차량 반편 인식 (OCR)
+- `Pytesseract`를 이용한 차량 번호판 인식 (OCR)
 - Google Colab 환경에서 실행 가능
 
 ---
@@ -19,14 +19,14 @@ Scipy를 활용한 함수 최적화 및 OpenCV &amp; Tesseract OCR을 이용한 
 ## 🔹 주요 시험 내용
 
 ### 1️⃣ Scipy를 활용한 최적화 시험
-- 특정 수식의 최소항을 창는 방법 습입
+- 특정 수식의 최소값을 찾는 방법 실습
 - 여러 개의 초기 추정값을 사용하여 최적화 성능 비교
 
 #### ✔️ 실행 코드 예시
 ```python
 from scipy import optimize
 
-# 최소할 함수 정의
+# 최소화할 함수 정의
 def func(x):
     return (x - 3) ** 2
 
@@ -42,7 +42,7 @@ Minimum value: 2.5388963550532293e-16
 ---
 
 ### 2️⃣ Scipy와 Matplotlib을 활용한 다중 최소항 시각화
-- `sin^2(x)` 함수의 다중 최소항을 찾고 그래픽로 시각화
+- `sin^2(x)` 함수의 다중 최소항을 찾고 그래프 시각화
 
 #### ✔️ 실행 코드 예시
 ```python
@@ -76,12 +76,14 @@ plt.legend()
 plt.grid(True)
 plt.show()
 ```
+#### ✔️ 실행 결과
+![최소값 시각화](이미지결과_1.png)
 
 ---
 
 ### 3️⃣ OpenCV를 활용한 이미지 처리 시험
-- `cv2.circle()`을 이용해 흼 배경 위에 검은 원 생성
-- Gaussian Blur 필터를 적용하여 흐리미 후과 시험
+- `cv2.circle()`을 이용해 흰 배경 위에 검은 원 생성
+- Gaussian Blur 필터를 적용하여 흐림 효과 실험
 
 #### ✔️ 실행 코드 예시
 ```python
@@ -91,7 +93,7 @@ import matplotlib.pyplot as plt
 
 # 이미지 생성
 height, width = 200, 200
-image = np.ones((height, width, 3), dtype=np.uint8) * 255  # 흼 배경
+image = np.ones((height, width, 3), dtype=np.uint8) * 255  # 흰 배경
 
 # 검은 원 그리기
 cv2.circle(image, (width//2, height//2), 50, (0, 0, 0), -1)
@@ -114,3 +116,29 @@ plt.axis('off')
 
 plt.show()
 ```
+#### ✔️ 실행 결과
+![원본 이미지](이미지결과_2.png) ![블러 적용 이미지](이미지결과_3.png)
+
+---
+
+### 4️⃣ 차량 번호판 인식 (OCR)
+- `Pytesseract`를 활용하여 차량 번호판을 감지하고 문자 추출
+
+#### ✔️ 실행 코드 예시
+```python
+import cv2
+import pytesseract
+
+# 번호판 문자 인식
+text = pytesseract.image_to_string(plate_image, config='--psm 8')
+print("Detected License Plate Text:", text)
+```
+#### ✔️ 실행 결과
+![번호판 인식 결과 1](이미지결과_5.png) ![번호판 인식 결과 2](이미지결과_6.png)
+
+## 🔗 관련 기술 및 패키지
+- `Scipy`
+- `NumPy`
+- `Matplotlib`
+- `OpenCV`
+- `Pytesseract`
